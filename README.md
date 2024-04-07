@@ -1,27 +1,30 @@
 # Stock Price Prediction
 
 ## AIM
-
 To develop a Recurrent Neural Network model for stock price prediction.
 
 ## Problem Statement and Dataset
+   Develop a Recurrent Neural Network (RNN) model to predict the stock prices of Google. The goal is to train the model using historical stock price data and then evaluate its performance on a separate test dataset.
+
+    Dataset: The dataset consists of two CSV files:
+        Trainset.csv: This file contains historical stock price data of Google, which will be used for training the RNN model. It includes features such as the opening price of the stock.
+        Testset.csv: This file contains additional historical stock price data of Google, which will be used for testing the trained RNN model. Similarly, it includes features such as the opening price of the stock.
+
+    The objective is to build a model that can effectively learn from the patterns in the training data to make accurate predictions on the test data.
 
 
 ## Design Steps
-
-### Step 1:
-Write your own steps
-
-### Step 2:
-
-### Step 3:
-
+### Step 1: Read and preprocess training data, including scaling and sequence creation.
+### Step 2: Initialize a Sequential model and add SimpleRNN and Dense layers.
+### Step 3: Compile the model with Adam optimizer and mean squared error loss.
+### Step 4: Train the model on the prepared training data.
+### Step 5: Preprocess test data, predict using the trained model, and visualize the results.
 
 
 ## Program
 #### Name: POOJA A
 #### Register Number: 212222240072
-```
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -53,16 +56,15 @@ length = 60
 n_features = 1
 
 model = models.Sequential()
-model.add(layers.SimpleRNN(10,input_shape=(length,n_features)))
+model.add(layers.SimpleRNN(150,input_shape=(length,n_features)))
 model.add(layers.Dense(1))
 
 model.compile(optimizer='adam', loss='mse')
 
-print("NAME: RAMA E.K. LEKSHMI   \nREGISTER NUMBER: 212222240082 \n        ")
-
+print("NAME: POOJA A  \nREGISTER NUMBER: 212222240072 \n        ")
 model.summary())
 
-model.fit(X_train1,y_train,epochs=100, batch_size=32)
+model.fit(X_train1,y_train,epochs=30, batch_size=15)
 
 dataset_test = pd.read_csv('testset.csv')
 test_set = dataset_test.iloc[:,1:2].values
@@ -83,9 +85,9 @@ X_test.shape
 predicted_stock_price_scaled = model.predict(X_test)
 predicted_stock_price = sc.inverse_transform(predicted_stock_price_scaled)
 
-print("NAME: RAMA E.K. LEKSHMI \nREGISTER NUMBER: 212222240082\n ")
-plt.plot(np.arange(0,1384),inputs, color='red', label = 'Test(Real) Google stock price')
-plt.plot(np.arange(60,1384),predicted_stock_price, color='blue', label = 'Predicted Google stock price')
+print("NAME: POOJA A \nREGISTER NUMBER: 212222240072\n ")
+plt.plot(np.arange(0,1384),inputs, color='yellow', label = 'Test(Real) Google stock price')
+plt.plot(np.arange(60,1384),predicted_stock_price, color='green', label = 'Predicted Google stock price')
 plt.title('Google Stock Price Prediction')
 plt.xlabel('Time')
 plt.ylabel('Google Stock Price')
@@ -97,11 +99,13 @@ plt.show()
 
 ### True Stock Price, Predicted Stock Price vs time
 
-Include your plot here
+![image](https://github.com/poojaanbu0/rnn-stock-price-prediction/assets/119390329/e24d0895-4ade-469c-8a27-c053410547c2)
 
 ### Mean Square Error
 
-Include the mean square error
+![image](https://github.com/poojaanbu0/rnn-stock-price-prediction/assets/119390329/85eb57db-84a0-4381-8395-50cae8378e27)
+
+![image](https://github.com/poojaanbu0/rnn-stock-price-prediction/assets/119390329/12b4725a-dcb3-4147-aa4e-733ba7d1b31f)
 
 ## Result
 Thus a Recurrent Neural Network model for stock price prediction is done.
